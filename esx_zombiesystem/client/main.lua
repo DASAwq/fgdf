@@ -487,23 +487,28 @@ if Config.ZombieDropLoot then
 			Citizen.Wait(1)
 			for i, entity in pairs(entitys) do
 				if IsPedDeadOrDying(entity, 1) == 1 then
-					if GetPedSourceOfDeath(entity) == PlayerPedId() then
-						local randomChance = math.random(1, 100)
+					local sourceOfDeath = GetPedSourceOfDeath(entity)
+					if sourceOfDeath == PlayerPedId() then
 						local randomWeapon = Config.WeaponLoot[math.random(1, #Config.WeaponLoot)]
 						local randomItem = Config.ItemLoot[math.random(1, #Config.ItemLoot)]
+						local randomLootType = math.random(1, 3)
 
-						if randomChance > 0 and randomChance < Config.ProbabilityWeaponLoot then
+						if randomLootType == 1 then
 							local randomAmmo = math.random(1, 30)
 							GiveWeaponToPed(PlayerPedId(), randomWeapon, randomAmmo, true, false)
 							ESX.ShowNotification('You found ' .. randomWeapon)
-						elseif randomChance >= Config.ProbabilityWeaponLoot and randomChance < Config.ProbabilityMoneyLoot then
+						elseif randomLootType == 2 then
 							TriggerServerEvent('esx_zombiesystem:moneyloot')
-						elseif randomChance >= Config.ProbabilityMoneyLoot and randomChance < Config.ProbabilityItemLoot then
-							TriggerServerEvent('esx_zombiesystem:itemloot', randomItem)
 						else
-							ESX.ShowNotification('You not found anything')
+							TriggerServerEvent('esx_zombiesystem:itemloot', randomItem)
 						end
 
+						local model = GetEntityModel(entity)
+						SetEntityAsNoLongerNeeded(entity)
+						SetModelAsNoLongerNeeded(model)
+						table.remove(entitys, i)
+					elseif IsEntityAVehicle(sourceOfDeath) then
+						-- Prevent loot drop if killed by a vehicle
 						local model = GetEntityModel(entity)
 						SetEntityAsNoLongerNeeded(entity)
 						SetModelAsNoLongerNeeded(model)

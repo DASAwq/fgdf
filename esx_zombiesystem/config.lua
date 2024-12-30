@@ -6,10 +6,10 @@ Config.MaxSpawnDistance = 150
 Config.DespawnDistance = 200
 
 Config.ZombieDropLoot = true
-Config.ProbabilityWeaponLoot = 1 -- 3%
-Config.ProbabilityMoneyLoot = 70  -- 30% chance for money
-Config.ProbabilityItemLoot = 29 -- 20% chance for items
--- Weapons: 3%, Money: 30%, Items: 20%, Nothing: 47%
+Config.ProbabilityWeaponLoot = 30 -- 30% chance for weapons
+Config.ProbabilityMoneyLoot = 60  -- 30% chance for money
+Config.ProbabilityItemLoot = 100 -- 40% chance for items
+-- Weapons: 30%, Money: 30%, Items: 40%
 Config.WeaponLoot = {
 	'weapon_switchblade',
     'weapon_bottle',

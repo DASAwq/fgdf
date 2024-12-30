@@ -51,11 +51,7 @@ AddEventHandler('esx_zombiesystem:militaryVehicleKill', function()
         local randomAmmo = math.random(1, 30)
         xPlayer.addWeapon(randomWeapon, randomAmmo)
         TriggerClientEvent("esx:showNotification", xPlayer.source, ('You found ' .. randomWeapon))
-    elseif randomChance >= Config.ProbabilityWeaponLoot and randomChance < Config.ProbabilityMoneyLoot then
-        local randomMoney = math.random(900, 1100)
-        xPlayer.addMoney(randomMoney)
-        TriggerClientEvent("esx:showNotification", xPlayer.source, ('You found ~g~$' .. randomMoney .. ' dollars'))
-    elseif randomChance >= Config.ProbabilityMoneyLoot and randomChance < Config.ProbabilityItemLoot then
+    elseif randomChance >= Config.ProbabilityWeaponLoot and randomChance < Config.ProbabilityItemLoot then
         local randomItemCount = math.random(1, 3)
         if xPlayer.canCarryItem(randomItem, randomItemCount) then
             xPlayer.addInventoryItem(randomItem, randomItemCount)
