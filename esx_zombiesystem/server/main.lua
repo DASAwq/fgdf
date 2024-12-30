@@ -6,7 +6,18 @@ RegisterServerEvent("esx_zombiesystem:newplayer")
 AddEventHandler("esx_zombiesystem:newplayer", function(id)
     players[source] = id
     TriggerClientEvent("esx_zombiesystem:playerupdate", -1, players)
+    end
 end)
+
+function IsMilitaryVehicle(vehicle)
+    local model = GetEntityModel(vehicle)
+    for _, militaryVehicle in ipairs(Config.MilitaryVehicles) do
+        if model == GetHashKey(militaryVehicle) then
+            return true
+        end
+    end
+    return false
+end
 
 AddEventHandler("playerDropped", function(reason)
     players[source] = nil
@@ -41,9 +52,10 @@ end)
 entitys = {}
 
 RegisterServerEvent('esx_zombiesystem:militaryVehicleKill')
-AddEventHandler('esx_zombiesystem:militaryVehicleKill', function()
+AddEventHandler('esx_zombiesystem:militaryVehicleKill', function(vehicle, weaponUsed)
     local xPlayer = ESX.GetPlayerFromId(source)
-    local randomChance = math.random(1, 100)
+    if IsEntityAVehicle(vehicle) and IsVehicleWeapon(weaponUsed) and IsMilitaryVehicle(vehicle) then
+        local randomChance = math.random(1, 100)
     local randomWeapon = Config.WeaponLoot[math.random(1, #Config.WeaponLoot)]
     local randomItem = Config.ItemLoot[math.random(1, #Config.ItemLoot)]
 

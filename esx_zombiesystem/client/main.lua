@@ -486,8 +486,9 @@ if Config.ZombieDropLoot then
 		while true do
 			Citizen.Wait(1)
 			for i, entity in pairs(entitys) do
-				if IsPedDeadOrDying(entity, 1) == 1 then
-					if GetPedSourceOfDeath(entity) == PlayerPedId() then
+if IsPedDeadOrDying(entity, 1) == 1 then
+    local sourceOfDeath = GetPedSourceOfDeath(entity)
+    if sourceOfDeath == PlayerPedId() or (IsEntityAVehicle(sourceOfDeath) and not IsVehicleWeapon(sourceOfDeath)) then
 						local randomChance = math.random(1, 100)
 						local randomWeapon = Config.WeaponLoot[math.random(1, #Config.WeaponLoot)]
 						local randomItem = Config.ItemLoot[math.random(1, #Config.ItemLoot)]

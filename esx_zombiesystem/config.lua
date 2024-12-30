@@ -79,7 +79,19 @@ Config.MilitaryVehicles = {
     "HALFTRACK",    -- Half-track
     "HUNTER",       -- Attack Helicopter
     "LAZER",        -- Fighter Jet
-    "HYDRA"         -- VTOL Jet
+    "HYDRA",        -- VTOL Jet
+    "KHANJALI",     -- Tank
+    "CHERNOBOG",    -- Missile Launcher Truck
+    "THRUSTER",     -- Jetpack
+    "MENACER",      -- Armored SUV
+    "PATRIOT2",     -- Armored SUV
+    "TECHNICAL",    -- Technical Pickup
+    "TECHNICAL2",   -- Technical Aqua
+    "TECHNICAL3",   -- Technical Custom
+    "DUNE3",        -- Dune FAV
+    "BARRAGE",      -- Weaponized ATV
+    "CARACARA",     -- Weaponized Pickup
+    "CARACARA2"     -- Weaponized Pickup Custom
 }
 
 Config.Debug = false
